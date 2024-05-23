@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/bootloader/esp-idf/cmake_install.cmake")
+  include("/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/bootloader/esp-idf/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/bootloader/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/bootloader/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

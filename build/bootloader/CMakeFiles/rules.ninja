@@ -318,7 +318,7 @@ rule C_STATIC_LIBRARY_LINKER____idf_main_
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /usr/bin/cmake --regenerate-during-build -S/home/schmuhbeck/esp/v5.2.1/esp-idf/components/bootloader/subproject -B/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/bootloader
+  command = /usr/bin/cmake --regenerate-during-build -S/home/schmuhbeck/esp/v5.2.1/esp-idf/components/bootloader/subproject -B/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/bootloader
   description = Re-running CMake...
   generator = 1
 

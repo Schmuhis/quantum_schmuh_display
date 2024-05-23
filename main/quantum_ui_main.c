@@ -345,13 +345,11 @@ void app_main(void)
     #elif defined CONFIG_LV_USE_DEMO_KEYPAD_AND_ENCODER
         lv_demo_keypad_encoder();
     #elif defined CONFIG_LV_USE_DEMO_BENCHMARK
-        //lv_demo_benchmark();
+        lv_demo_benchmark();
     #elif defined CONFIG_LV_USE_DEMO_STRESS
         lv_demo_stress();
     #elif defined CONFIG_LV_USE_DEMO_MUSIC
         lv_demo_music();
-    #else
-        #error "No demo application selected."
     #endif
 
     quantum_ui(disp);

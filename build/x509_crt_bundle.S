@@ -1,4 +1,4 @@
-/* * Data converted from /home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 .section .rodata.embedded

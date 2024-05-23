@@ -1,4 +1,4 @@
-# Install script for directory: /home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/components/lvgl__lvgl
+# Install script for directory: /home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/components/lvgl__lvgl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

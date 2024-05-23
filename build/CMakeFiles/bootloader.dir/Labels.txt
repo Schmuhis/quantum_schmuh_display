@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/CMakeFiles/bootloader
-/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/CMakeFiles/bootloader.rule
-/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/CMakeFiles/bootloader-complete.rule
-/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
-/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/CMakeFiles/bootloader
+/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/CMakeFiles/bootloader.rule
+/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/CMakeFiles/bootloader-complete.rule
+/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

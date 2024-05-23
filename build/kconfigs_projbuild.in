@@ -3,4 +3,4 @@ source "/home/schmuhbeck/esp/v5.2.1/esp-idf/components/esp_app_format/Kconfig.pr
 source "/home/schmuhbeck/esp/v5.2.1/esp-idf/components/esp_rom/Kconfig.projbuild"
 source "/home/schmuhbeck/esp/v5.2.1/esp-idf/components/esptool_py/Kconfig.projbuild"
 source "/home/schmuhbeck/esp/v5.2.1/esp-idf/components/partition_table/Kconfig.projbuild"
-source "/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/main/Kconfig.projbuild"
+source "/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/main/Kconfig.projbuild"

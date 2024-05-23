@@ -39,6 +39,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/schmuhbeck/waveshare/ESP32-S3-Touch-LCD-4.3_Code/ESP-IDF/demo1/build/esp-idf/esp_system/port/cmake_install.cmake")
+  include("/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_display/build/esp-idf/esp_system/port/cmake_install.cmake")
 endif()
 
