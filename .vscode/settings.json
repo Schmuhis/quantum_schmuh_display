@@ -1,0 +1,13 @@
+{
+    "idf.adapterTargetName": "esp32s3",
+    "idf.port": "/dev/ttyACM0",
+    "idf.openOcdConfigs": [
+        "board/esp32s3-bridge.cfg"
+    ],
+    "idf.flashType": "UART",
+    "files.associations": {
+        "quantum_ui.h": "c",
+        "esp_lcd_touch_gt911.h": "c",
+        "esp_lcd_touch.h": "c"
+    }
+}
