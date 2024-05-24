@@ -24,54 +24,54 @@
 static const char *TAG = "example";
 
 // I2C settings
-#define I2C_MASTER_SCL_IO           CONFIG_I2C_MASTER_SCL      /*!< GPIO number used for I2C master clock */
-#define I2C_MASTER_SDA_IO           CONFIG_I2C_MASTER_SDA      /*!< GPIO number used for I2C master data  */
-#define I2C_MASTER_NUM              0                          /*!< I2C master i2c port number, the number of i2c peripheral interfaces available will depend on the chip */
-#define I2C_MASTER_FREQ_HZ          400000                     /*!< I2C master clock frequency */
-#define I2C_MASTER_TX_BUF_DISABLE   0                          /*!< I2C master doesn't need buffer */
-#define I2C_MASTER_RX_BUF_DISABLE   0                          /*!< I2C master doesn't need buffer */
-#define I2C_MASTER_TIMEOUT_MS       1000
+#define I2C_MASTER_SCL_IO CONFIG_I2C_MASTER_SCL /*!< GPIO number used for I2C master clock */
+#define I2C_MASTER_SDA_IO CONFIG_I2C_MASTER_SDA /*!< GPIO number used for I2C master data  */
+#define I2C_MASTER_NUM 0                        /*!< I2C master i2c port number, the number of i2c peripheral interfaces available will depend on the chip */
+#define I2C_MASTER_FREQ_HZ 400000               /*!< I2C master clock frequency */
+#define I2C_MASTER_TX_BUF_DISABLE 0             /*!< I2C master doesn't need buffer */
+#define I2C_MASTER_RX_BUF_DISABLE 0             /*!< I2C master doesn't need buffer */
+#define I2C_MASTER_TIMEOUT_MS 1000
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////// Please update the following configuration according to your LCD spec //////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define EXAMPLE_LCD_PIXEL_CLOCK_HZ     (21 * 1000 * 1000)
-#define EXAMPLE_LCD_BK_LIGHT_ON_LEVEL  1
+#define EXAMPLE_LCD_PIXEL_CLOCK_HZ (21 * 1000 * 1000)
+#define EXAMPLE_LCD_BK_LIGHT_ON_LEVEL 1
 #define EXAMPLE_LCD_BK_LIGHT_OFF_LEVEL !EXAMPLE_LCD_BK_LIGHT_ON_LEVEL
-#define EXAMPLE_PIN_NUM_BK_LIGHT       -1
-#define EXAMPLE_PIN_NUM_HSYNC          46
-#define EXAMPLE_PIN_NUM_VSYNC          3
-#define EXAMPLE_PIN_NUM_DE             5
-#define EXAMPLE_PIN_NUM_PCLK           7
-#define EXAMPLE_PIN_NUM_DATA0          14 // B3
-#define EXAMPLE_PIN_NUM_DATA1          38 // B4
-#define EXAMPLE_PIN_NUM_DATA2          18 // B5
-#define EXAMPLE_PIN_NUM_DATA3          17 // B6
-#define EXAMPLE_PIN_NUM_DATA4          10 // B7
-#define EXAMPLE_PIN_NUM_DATA5          39 // G2
-#define EXAMPLE_PIN_NUM_DATA6          0 // G3
-#define EXAMPLE_PIN_NUM_DATA7          45 // G4
-#define EXAMPLE_PIN_NUM_DATA8          48 // G5
-#define EXAMPLE_PIN_NUM_DATA9          47 // G6
-#define EXAMPLE_PIN_NUM_DATA10         21 // G7
-#define EXAMPLE_PIN_NUM_DATA11         1  // R3
-#define EXAMPLE_PIN_NUM_DATA12         2  // R4
-#define EXAMPLE_PIN_NUM_DATA13         42 // R5
-#define EXAMPLE_PIN_NUM_DATA14         41 // R6
-#define EXAMPLE_PIN_NUM_DATA15         40 // R7
-#define EXAMPLE_PIN_NUM_DISP_EN        -1
+#define EXAMPLE_PIN_NUM_BK_LIGHT -1
+#define EXAMPLE_PIN_NUM_HSYNC 46
+#define EXAMPLE_PIN_NUM_VSYNC 3
+#define EXAMPLE_PIN_NUM_DE 5
+#define EXAMPLE_PIN_NUM_PCLK 7
+#define EXAMPLE_PIN_NUM_DATA0 14  // B3
+#define EXAMPLE_PIN_NUM_DATA1 38  // B4
+#define EXAMPLE_PIN_NUM_DATA2 18  // B5
+#define EXAMPLE_PIN_NUM_DATA3 17  // B6
+#define EXAMPLE_PIN_NUM_DATA4 10  // B7
+#define EXAMPLE_PIN_NUM_DATA5 39  // G2
+#define EXAMPLE_PIN_NUM_DATA6 0   // G3
+#define EXAMPLE_PIN_NUM_DATA7 45  // G4
+#define EXAMPLE_PIN_NUM_DATA8 48  // G5
+#define EXAMPLE_PIN_NUM_DATA9 47  // G6
+#define EXAMPLE_PIN_NUM_DATA10 21 // G7
+#define EXAMPLE_PIN_NUM_DATA11 1  // R3
+#define EXAMPLE_PIN_NUM_DATA12 2  // R4
+#define EXAMPLE_PIN_NUM_DATA13 42 // R5
+#define EXAMPLE_PIN_NUM_DATA14 41 // R6
+#define EXAMPLE_PIN_NUM_DATA15 40 // R7
+#define EXAMPLE_PIN_NUM_DISP_EN -1
 
 // The pixel number in horizontal and vertical
-#define EXAMPLE_LCD_H_RES              800
-#define EXAMPLE_LCD_V_RES              480
+#define EXAMPLE_LCD_H_RES 800
+#define EXAMPLE_LCD_V_RES 480
 
 #if CONFIG_EXAMPLE_DOUBLE_FB
-#define EXAMPLE_LCD_NUM_FB             2
+#define EXAMPLE_LCD_NUM_FB 2
 #else
-#define EXAMPLE_LCD_NUM_FB             1
+#define EXAMPLE_LCD_NUM_FB 1
 #endif // CONFIG_EXAMPLE_DOUBLE_FB
 
-#define EXAMPLE_LVGL_TICK_PERIOD_MS    2
+#define EXAMPLE_LVGL_TICK_PERIOD_MS 2
 
 // we use two semaphores to sync the VSYNC event and the LVGL task, to avoid potential tearing effect
 #if CONFIG_EXAMPLE_AVOID_TEAR_EFFECT_WITH_SEM
@@ -83,13 +83,12 @@ SemaphoreHandle_t sem_gui_ready;
 
 extern void quantum_ui(lv_disp_t *disp);
 
-
-
 static bool example_on_vsync_event(esp_lcd_panel_handle_t panel, const esp_lcd_rgb_panel_event_data_t *event_data, void *user_data)
 {
     BaseType_t high_task_awoken = pdFALSE;
 #if CONFIG_EXAMPLE_AVOID_TEAR_EFFECT_WITH_SEM
-    if (xSemaphoreTakeFromISR(sem_gui_ready, &high_task_awoken) == pdTRUE) {
+    if (xSemaphoreTakeFromISR(sem_gui_ready, &high_task_awoken) == pdTRUE)
+    {
         xSemaphoreGiveFromISR(sem_vsync_end, &high_task_awoken);
     }
 #endif
@@ -98,7 +97,7 @@ static bool example_on_vsync_event(esp_lcd_panel_handle_t panel, const esp_lcd_r
 
 static void example_lvgl_flush_cb(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t *color_map)
 {
-    esp_lcd_panel_handle_t panel_handle = (esp_lcd_panel_handle_t) drv->user_data;
+    esp_lcd_panel_handle_t panel_handle = (esp_lcd_panel_handle_t)drv->user_data;
     int offsetx1 = area->x1;
     int offsetx2 = area->x2;
     int offsety1 = area->y1;
@@ -113,7 +112,7 @@ static void example_lvgl_flush_cb(lv_disp_drv_t *drv, const lv_area_t *area, lv_
 }
 
 /*Read the touchpad*/
-void example_touchpad_read( lv_indev_drv_t * drv, lv_indev_data_t * data )
+void example_touchpad_read(lv_indev_drv_t *drv, lv_indev_data_t *data)
 {
     uint16_t touchpad_x[1] = {0};
     uint16_t touchpad_y[1] = {0};
@@ -125,12 +124,15 @@ void example_touchpad_read( lv_indev_drv_t * drv, lv_indev_data_t * data )
     /* Get coordinates */
     bool touchpad_pressed = esp_lcd_touch_get_coordinates(drv->user_data, touchpad_x, touchpad_y, NULL, &touchpad_cnt, 1);
 
-    if (touchpad_pressed && touchpad_cnt > 0) {
+    if (touchpad_pressed && touchpad_cnt > 0)
+    {
         data->point.x = touchpad_x[0];
         data->point.y = touchpad_y[0];
         data->state = LV_INDEV_STATE_PR;
         ESP_LOGI(TAG, "X=%u Y=%u", data->point.x, data->point.y);
-    } else {
+    }
+    else
+    {
         data->state = LV_INDEV_STATE_REL;
     }
 }
@@ -179,14 +181,13 @@ void app_main(void)
     ESP_LOGI(TAG, "Turn off LCD backlight");
     gpio_config_t bk_gpio_config = {
         .mode = GPIO_MODE_OUTPUT,
-        .pin_bit_mask = 1ULL << EXAMPLE_PIN_NUM_BK_LIGHT
-    };
+        .pin_bit_mask = 1ULL << EXAMPLE_PIN_NUM_BK_LIGHT};
     ESP_ERROR_CHECK(gpio_config(&bk_gpio_config));
 #endif
-    
+
     ESP_ERROR_CHECK(i2c_master_init());
     ESP_LOGI(TAG, "I2C initialized successfully");
-    
+
     esp_lcd_touch_handle_t tp = NULL;
     esp_lcd_panel_io_handle_t tp_io_handle = NULL;
     esp_lcd_panel_io_i2c_config_t tp_io_config = ESP_LCD_TOUCH_IO_I2C_GT911_CONFIG();
@@ -212,11 +213,11 @@ void app_main(void)
     uint8_t write_buf = 0x01;
 
     ret = i2c_master_write_to_device(I2C_MASTER_NUM, 0x24, &write_buf, 1, I2C_MASTER_TIMEOUT_MS / portTICK_PERIOD_MS);
-    ESP_LOGI(TAG,"0x48 0x01 ret is %d",ret);
+    ESP_LOGI(TAG, "0x48 0x01 ret is %d", ret);
 
     write_buf = 0x0E;
     ret = i2c_master_write_to_device(I2C_MASTER_NUM, 0x38, &write_buf, 1, I2C_MASTER_TIMEOUT_MS / portTICK_PERIOD_MS);
-    ESP_LOGI(TAG,"0x70 0x00 ret is %d",ret);
+    ESP_LOGI(TAG, "0x70 0x00 ret is %d", ret);
 
     ESP_LOGI(TAG, "Install RGB LCD panel driver");
     esp_lcd_panel_handle_t panel_handle = NULL;
@@ -295,11 +296,12 @@ void app_main(void)
 #else
     ESP_LOGI(TAG, "Allocate separate LVGL draw buffers from PSRAM");
     buf1 = heap_caps_malloc(EXAMPLE_LCD_H_RES * 160 * sizeof(lv_color_t), MALLOC_CAP_DMA);
-    assert(buf1);
-    // buf2 = heap_caps_malloc(EXAMPLE_LCD_H_RES * 80 * sizeof(lv_color_t), MALLOC_CAP_DMA);
-    // assert(buf2);
-    // initialize LVGL draw buffers
-    lv_disp_draw_buf_init(&disp_buf, buf1, buf2, EXAMPLE_LCD_H_RES * 160 );
+    // buf1 = (lv_color_t *)heap_caps_malloc(EXAMPLE_LCD_H_RES * sizeof(lv_color_t), MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
+    // assert(buf1);
+    //  buf2 = heap_caps_malloc(EXAMPLE_LCD_H_RES * 80 * sizeof(lv_color_t), MALLOC_CAP_DMA);
+    //  assert(buf2);
+    //  initialize LVGL draw buffers
+    lv_disp_draw_buf_init(&disp_buf, buf1, buf2, EXAMPLE_LCD_H_RES * 160);
 #endif // CONFIG_EXAMPLE_DOUBLE_FB
 
     ESP_LOGI(TAG, "Register display driver to LVGL");
@@ -309,7 +311,7 @@ void app_main(void)
     disp_drv.flush_cb = example_lvgl_flush_cb;
     disp_drv.draw_buf = &disp_buf;
     disp_drv.user_data = panel_handle;
-    
+
 #if CONFIG_EXAMPLE_DOUBLE_FB
     disp_drv.full_refresh = true; // the full_refresh mode can maintain the synchronization between the two frame buffers
 #endif
@@ -319,19 +321,16 @@ void app_main(void)
     // Tick interface for LVGL (using esp_timer to generate 2ms periodic event)
     const esp_timer_create_args_t lvgl_tick_timer_args = {
         .callback = &example_increase_lvgl_tick,
-        .name = "lvgl_tick"
-    };
+        .name = "lvgl_tick"};
 
-
-    ESP_LOGI(TAG,"Register display indev to LVGL");
+    ESP_LOGI(TAG, "Register display indev to LVGL");
     lv_indev_drv_t indev_drv;
-    lv_indev_drv_init ( &indev_drv );
+    lv_indev_drv_init(&indev_drv);
     indev_drv.type = LV_INDEV_TYPE_POINTER;
     indev_drv.disp = disp;
     indev_drv.read_cb = example_touchpad_read;
     indev_drv.user_data = tp;
-    lv_indev_drv_register( &indev_drv );
-
+    lv_indev_drv_register(&indev_drv);
 
     esp_timer_handle_t lvgl_tick_timer = NULL;
     ESP_ERROR_CHECK(esp_timer_create(&lvgl_tick_timer_args, &lvgl_tick_timer));
@@ -339,24 +338,26 @@ void app_main(void)
 
     ESP_LOGI(TAG, "Display LVGL Scatter Chart");
 
-    #if defined CONFIG_LV_USE_DEMO_WIDGETS
-        lv_demo_widgets();
-    #elif defined CONFIG_LV_USE_DEMO_KEYPAD_AND_ENCODER
-        lv_demo_keypad_encoder();
-    #elif defined CONFIG_LV_USE_DEMO_BENCHMARK
-        //lv_demo_benchmark();
-    #elif defined CONFIG_LV_USE_DEMO_STRESS
-        lv_demo_stress();
-    #elif defined CONFIG_LV_USE_DEMO_MUSIC
-        lv_demo_music();
-    #else
-        #error "No demo application selected."
-    #endif
+#if defined CONFIG_LV_USE_DEMO_WIDGETS
+    lv_demo_widgets();
+#elif defined CONFIG_LV_USE_DEMO_KEYPAD_AND_ENCODER
+    lv_demo_keypad_encoder();
+#elif defined CONFIG_LV_USE_DEMO_BENCHMARK
+    // lv_demo_benchmark();
+#elif defined CONFIG_LV_USE_DEMO_STRESS
+    lv_demo_stress();
+#elif defined CONFIG_LV_USE_DEMO_MUSIC
+    lv_demo_music();
+#else
+#error "No demo application selected."
+#endif
 
     wifi_init_sta();
+
     quantum_ui(disp);
 
-    while (1) {
+    while (1)
+    {
         // raise the task priority of LVGL and/or reduce the handler period can improve the performance
         vTaskDelay(pdMS_TO_TICKS(10));
         // The task running lv_timer_handler should have lower priority than that running `lv_tick_inc`

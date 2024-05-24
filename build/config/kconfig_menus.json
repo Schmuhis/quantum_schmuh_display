@@ -6029,6 +6029,16 @@
                 "range": null,
                 "title": "SDA GPIO Num",
                 "type": "int"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": null,
+                "id": "LV_CONF_SKIP",
+                "name": "LV_CONF_SKIP",
+                "range": null,
+                "title": "Uncheck this to use custom lv_conf.h",
+                "type": "bool"
             }
         ],
         "depends_on": null,
@@ -27889,7 +27899,7 @@
                         "id": "LV_CONF_SKIP",
                         "name": "LV_CONF_SKIP",
                         "range": null,
-                        "title": null,
+                        "title": "Uncheck this to use custom lv_conf.h",
                         "type": "bool"
                     },
                     {

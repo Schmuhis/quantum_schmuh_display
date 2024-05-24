@@ -32,5 +32,7 @@ menu "Example Configuration"
         default 8 if IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
         help
             GPIO number for I2C Master data line.
-	
+    config LV_CONF_SKIP
+        bool "Uncheck this to use custom lv_conf.h"
+        default y
 endmenu
