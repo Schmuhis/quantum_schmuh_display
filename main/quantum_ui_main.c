@@ -19,6 +19,7 @@
 #include "demos/lv_demos.h"
 #include "driver/i2c.h"
 #include "esp_lcd_touch_gt911.h"
+#include "wifi_connector.h"
 
 static const char *TAG = "example";
 
@@ -81,6 +82,8 @@ SemaphoreHandle_t sem_gui_ready;
 // LV_IMG_DECLARE(img_480_800_16_bmp);
 
 extern void quantum_ui(lv_disp_t *disp);
+
+
 
 static bool example_on_vsync_event(esp_lcd_panel_handle_t panel, const esp_lcd_rgb_panel_event_data_t *event_data, void *user_data)
 {
@@ -350,16 +353,8 @@ void app_main(void)
         #error "No demo application selected."
     #endif
 
+    // wifi_init_sta();
     quantum_ui(disp);
-
-    // lv_obj_t * img = lv_img_create(lv_scr_act());
-    // lv_img_set_src(img, &img_480_800_16_bmp);
-    // lv_obj_center(img);
-
-    // lv_obj_t * scr = lv_scr_act();
-    // lv_obj_remove_style_all(scr);
-    // lv_obj_set_style_bg_opa(scr, LV_OPA_COVER, 0);
-    // lv_obj_set_style_bg_color(scr,lv_color_hex(0xFFFFFF),LV_PART_INDICATOR | LV_STATE_FOCUSED);
 
     while (1) {
         // raise the task priority of LVGL and/or reduce the handler period can improve the performance
