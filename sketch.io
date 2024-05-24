@@ -186,14 +186,18 @@ static void roll_dice_cb(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t *btn = lv_event_get_target(e);
+    lv_obj_t *grid = lv_obj_get_parent(btn);
+    lv_obj_t * child = lv_obj_get_child(grid, -1);
+       
+    
     if (code == LV_EVENT_CLICKED)
     {
         static uint8_t cnt = 0;
-        cnt++;
+        cnt = random(1, 6);
 
         /*Get the first child of the button which is the label and change its text*/
-        lv_obj_t *label = lv_obj_get_child(btn, 0);
-        lv_label_set_text_fmt(label, "Button: %d", cnt);
+        lv_obj_t *label = lv_obj_get_child(child, 0);
+        lv_label_set_text_fmt(label, "%d", cnt);
     }
 }
 
@@ -457,7 +461,7 @@ void setup()
     quantum_ui();
     setup_wifi();
   
-  pinMode(LED_BUILTIN, OUTPUT);
+
 
  
 }
