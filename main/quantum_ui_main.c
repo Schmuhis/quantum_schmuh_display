@@ -353,7 +353,7 @@ void app_main(void)
         #error "No demo application selected."
     #endif
 
-    // wifi_init_sta();
+    wifi_init_sta();
     quantum_ui(disp);
 
     while (1) {
