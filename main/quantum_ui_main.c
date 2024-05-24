@@ -297,7 +297,7 @@ void app_main(void)
     ESP_LOGI(TAG, "Allocate separate LVGL draw buffers from PSRAM");
     buf1 = heap_caps_malloc(EXAMPLE_LCD_H_RES * 160 * sizeof(lv_color_t), MALLOC_CAP_DMA);
     // buf1 = (lv_color_t *)heap_caps_malloc(EXAMPLE_LCD_H_RES * sizeof(lv_color_t), MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
-    // assert(buf1);
+    assert(buf1);
     //  buf2 = heap_caps_malloc(EXAMPLE_LCD_H_RES * 80 * sizeof(lv_color_t), MALLOC_CAP_DMA);
     //  assert(buf2);
     //  initialize LVGL draw buffers
@@ -352,7 +352,7 @@ void app_main(void)
 #error "No demo application selected."
 #endif
 
-    wifi_init_sta();
+    // wifi_init_sta();
 
     quantum_ui(disp);
 

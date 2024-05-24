@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "rgb_panel",
-    "project_version":    "7a39567-dirty",
+    "project_version":    "efa19ca-dirty",
     "project_path":       "/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_disp",
     "idf_path":           "/home/schmuhbeck/esp/v5.2.1/esp-idf",
     "build_dir":          "/home/schmuhbeck/hackathon/schmuhis/quantum_schmuh_disp/build",
