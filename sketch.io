@@ -217,7 +217,9 @@ static void roll_dice_cb(lv_event_t *e)
 
 void setup_grid(lv_obj_t *background)
 {
-
+    static const lv_font_t * font_large;
+    font_large     =  &lv_font_montserrat_14;
+    lv_obj_set_style_text_font(background, font_large, 0);
     lv_obj_set_style_bg_color(background, lv_color_hex(0x5b5b5b), LV_PART_MAIN);
     static lv_coord_t col_dsc[] = {LCD_H_RES / 2 - 15, LCD_H_RES / 2 - 15, LV_GRID_TEMPLATE_LAST};
     static lv_coord_t row_dsc[] = {LCD_V_RES / 2 - 15, LCD_V_RES / 2 - 15, LV_GRID_TEMPLATE_LAST};
@@ -254,6 +256,15 @@ void setup_grid(lv_obj_t *background)
     lv_obj_center(player_list_text_label);
     lv_obj_center(dice_text_label);
     lv_obj_center(button_output_text_label);
+    
+    
+   
+
+    //lv_obj_set_style_text_font(player_list_text_label, font_large, 0);
+    //lv_obj_set_style_text_font(dice_text_label, font_large, 0);
+    //lv_obj_set_style_text_font(button_output_text_label, font_large, 0);
+
+    
     lv_obj_set_style_bg_color(dice_btn, lv_color_hex(0xbcbcbc), LV_PART_MAIN);
     lv_obj_set_style_bg_color(button_output, lv_color_hex(0xbcbcbc), LV_PART_MAIN);
     lv_obj_set_style_bg_color(player_list, lv_color_hex(0xbcbcbc), LV_PART_MAIN);
@@ -292,7 +303,7 @@ int httpGetCall(){
         returnValue = payload.toInt() % 6;
         Serial.println(returnValue);
         if (returnValue == 0){
-          returnValue = 1;
+          returnValue = random(1,6);
         }
         return returnValue;
         
@@ -315,8 +326,8 @@ void setup()
 {
     Serial.begin(115200); /* prepare for possible serial debug */
 
-    String LVGL_Arduino = "Hello LVGL! ";
-    LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
+    String LVGL_Arduino = "\tQuantum Board!\n\nConnecting to internet... ";
+ 
 
     Serial.println(LVGL_Arduino);
     Serial.println("I am ESP32_Display_Panel");
@@ -414,8 +425,10 @@ void setup()
     /* Release the mutex */
     
     lvgl_port_unlock();
-    quantum_ui();
     setup_wifi();
+    delay(2000);
+    quantum_ui();
+    
     
 
  
