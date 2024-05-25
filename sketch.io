@@ -34,7 +34,7 @@
 #include <demos/lv_demos.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
-
+#include <ArduinoJson.h>
 #include <HTTPClient.h>
 
 // Extend IO Pin define
@@ -53,6 +53,7 @@
 #define I2C_MASTER_NUM 0
 #define I2C_MASTER_SDA_IO 8
 #define I2C_MASTER_SCL_IO 9
+
 
 /**
 /* To use the built-in examples and demos of LVGL uncomment the includes below respectively.
@@ -76,6 +77,8 @@
 WiFiClient espClient;
 PubSubClient client(espClient);
 
+int currentPlayer = 1;
+String serverName = "https://lfdr.de/qrng_api/qrng";
 enum class Command {
   TEXT,
   DICE,
@@ -187,18 +190,29 @@ static void roll_dice_cb(lv_event_t *e)
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t *btn = lv_event_get_target(e);
     lv_obj_t *grid = lv_obj_get_parent(btn);
-    lv_obj_t * child = lv_obj_get_child(grid, -1);
-       
+    lv_obj_t *child = lv_obj_get_child(grid, -1);
+    lv_obj_t *active_player = lv_obj_get_child(grid, 0);
     
+
     if (code == LV_EVENT_CLICKED)
     {
         static uint8_t cnt = 0;
-        cnt = random(1, 6);
+        cnt = httpGetCall();
+        
 
         /*Get the first child of the button which is the label and change its text*/
         lv_obj_t *label = lv_obj_get_child(child, 0);
         lv_label_set_text_fmt(label, "%d", cnt);
+        currentPlayer++;
+        if (currentPlayer == 5){
+          currentPlayer=1;
+        }
+    lv_obj_t *active_player_label = lv_obj_get_child(active_player,0);
+    lv_label_set_text_fmt(active_player_label, "Player %d", currentPlayer);
     }
+    
+    
+    
 }
 
 void setup_grid(lv_obj_t *background)
@@ -253,106 +267,48 @@ void quantum_ui()
     setup_grid(background);
 }
 
-void reconnect() {
-  // Loop until we're reconnected
-  while (!client.connected()) {
-    Serial.print("Attempting MQTT connection...");
-    if (client.connect(CLIENT_ID)) {
-      Serial.println("connected");
+int httpGetCall(){
+    //Send an HTTP POST request every 10 minutes
 
-    } else {
-      Serial.print("failed, rc=");
-      Serial.print(client.state());
-      Serial.println(" try again in 5 seconds");
-      // Wait 5 seconds before retrying
-      delay(5000);
-    }
-  }
-}
+    int returnValue = 0;
+    //Check WiFi connection status
+    if(WiFi.status()== WL_CONNECTED){
+      HTTPClient http;
 
-Command resolve_command(const char* topic) {
-  if (strncmp(topic, "roll", sizeof(topic)) == 0) {
-    return Command::ROLL;
-  }
-  if (strncmp(topic, "text", sizeof(topic)) == 0) {
-    return Command::TEXT;
-  }
-  if (strncmp(topic, "dice", sizeof(topic)) == 0) {
-    return Command::DICE;
-  }
-  return Command::INVALID;
-}
-
-
-
-void callback(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Deppiii");
-  String value = "";
-  for (int i = 0; i < length; i++) {
-    value += (char)payload[i];
-  }
-  
-  char *p = topic;
-  char *str;
-  str = strtok(p, "/"); // delimiter is the semicolon
-  String id = strtok(NULL, "/");
-  String command = strtok(NULL, "/");
-  Serial.println(command);
-  Serial.println(value);
-}
-
-void execute_command(String command, String value) {  
-  switch (resolve_command(command.c_str())) {
-    case Command::DICE:
-      {
-        Serial.println("Have to Show Result");
-        break;
-      }
-    case Command::ROLL:
-      {
-         Serial.println("Have to roll");
-        break;
-      }
-    case Command::TEXT:
-      {
-        Serial.println("Have to show text");
-        break;
-      }
-    case Command::INVALID:
-      {
-        Serial.println("Invalid Comand");
-        break;
-      }
-  }
-}
-
-void httpGetCall(){
-    HTTPClient http;
-
-    Serial.println("[HTTP] begin...\n");
-    // configure traged server and url
-    //http.begin("https://www.howsmyssl.com/a/check", ca); //HTTPS
-    http.begin("http://example.com/index.html");  //HTTP
-
-    Serial.println("[HTTP] GET...\n");
-    // start connection and send HTTP header
-    int httpCode = http.GET();
-
-    // httpCode will be negative on error
-    if (httpCode > 0) {
-      // HTTP header has been send and Server response header has been handled
-      Serial.println("Hat funktioniert mitm Rest");
-
-      // file found at server
-      if (httpCode == HTTP_CODE_OK) {
+      String serverPath = serverName + "?length=3&format=HEX";
+      
+      // Your Domain name with URL path or IP address with path
+      http.begin(serverPath.c_str());
+      
+      
+      // Send HTTP GET request
+      int httpResponseCode = http.GET();
+      
+      if (httpResponseCode>0) {
+        Serial.print("HTTP Response code: ");
+        Serial.println(httpResponseCode);
         String payload = http.getString();
-        Serial.println(payload);
+        payload = payload.substring(19, 24);
+        returnValue = payload.toInt() % 6;
+        Serial.println(returnValue);
+        if (returnValue == 0){
+          returnValue = 1;
+        }
+        return returnValue;
+        
       }
-    } else {
-      Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+      else {
+        Serial.print("Error code: ");
+        Serial.println(httpResponseCode);
+      }
+      // Free resources
+      http.end();
+    }
+    else {
+      Serial.println("WiFi Disconnected");
     }
 
-    http.end();
+     
  }
 
 void setup()
@@ -460,8 +416,7 @@ void setup()
     lvgl_port_unlock();
     quantum_ui();
     setup_wifi();
-  
-
+    
 
  
 }
